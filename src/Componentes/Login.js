@@ -35,35 +35,49 @@ const Login = ({ onLogin, onToggleMode }) => {
     }
 
     try {
-      // Aquí harás la llamada a tu API .NET
-      const response = await fetch("http://localhost:5000/api/auth/login", {
+      // CORREGIDO: Cambiar los nombres de los campos para que coincidan con el backend
+      const response = await fetch("http://localhost:5050/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          correo: formData.correo,
-          contrasena: formData.contrasena,
+          email: formData.correo,     // Cambiar "correo" por "email"
+          password: formData.contrasena, // Cambiar "contrasena" por "password"
         }),
       });
+
+      // Verificar si la respuesta es JSON válida
+      const contentType = response.headers.get("content-type");
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error("El servidor no respondió con JSON válido");
+      }
 
       const data = await response.json();
 
       if (response.ok) {
-        // Guardar token y datos del usuario (usando variables en memoria por la restricción)
+        // Guardar token y datos del usuario
         sessionStorage.setItem("token", data.token);
-        sessionStorage.setItem("usuario", JSON.stringify(data.usuario));
+        sessionStorage.setItem("usuario", JSON.stringify(data.user)); // Cambiar "usuario" por "user"
 
         // Llamar a la función onLogin del componente padre
         if (onLogin) {
-          onLogin(data.usuario);
+          onLogin(data.user); // Cambiar "usuario" por "user"
         }
       } else {
         setError(data.message || "Error al iniciar sesión");
       }
     } catch (error) {
       console.error("Error de conexión:", error);
-      setError("Error de conexión. Por favor, intenta de nuevo.");
+      
+      // Mensajes de error más específicos
+      if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
+        setError("No se puede conectar al servidor. Verifica que el backend esté ejecutándose en el puerto 5050.");
+      } else if (error.message.includes('JSON')) {
+        setError("Error en la respuesta del servidor. Verifica la configuración del backend.");
+      } else {
+        setError("Error de conexión. Por favor, intenta de nuevo.");
+      }
     } finally {
       setIsLoading(false);
     }
@@ -81,7 +95,7 @@ const Login = ({ onLogin, onToggleMode }) => {
           </p>
         </div>
 
-        <div className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm space-y-4">
             <div>
               <label
@@ -145,7 +159,6 @@ const Login = ({ onLogin, onToggleMode }) => {
                   : "bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               }`}
               disabled={isLoading}
-              onClick={handleSubmit}
             >
               {isLoading ? (
                 <div className="flex items-center">
@@ -170,7 +183,7 @@ const Login = ({ onLogin, onToggleMode }) => {
               </button>
             </p>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   );
