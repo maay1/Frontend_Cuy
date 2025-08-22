@@ -1,0 +1,25 @@
+[
+    {
+        "id": 1,
+        "nombre": "Cuy Peruano",
+        "activo": true
+    },
+
+    {
+        "id": 2,
+        "nombre": "Cuy Inti",
+        "activo": true
+    },
+
+    {
+        "id": 3,
+        "nombre": "Cuy Mantaro",
+        "activo": true
+    },
+
+    {
+        "id": 4,
+        "nombre": "Cuy Americano",
+        "activo": true
+    }
+]
