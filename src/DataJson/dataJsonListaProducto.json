@@ -1,0 +1,38 @@
+[
+    {
+        "id": 12,
+        "nombre": "CASACA    VARILITE",
+        "descripcion": "Cuando   cae    la  temperatura,  está  casaca    ofrece  abrigo    ligero  y plegable contra   el frio.    Incorpora   cámaras    tejidas con  aislamiento...",
+        "precio": 379.00,
+        "url": "producto1.png",
+        "desctacado": true,
+        "activo": true
+    },
+    {
+        "id": 5,
+        "nombre": "POLO  DOODLE    BADGE",
+        "descripcion": "Con  este  polo  adidas,   recordarás los  días  en    que cubrías  tus   cuadernos  con   dibujos....",
+        "precio": 89.00,
+        "url": "producto2.png",
+        "desctacado": true,
+        "activo": true
+    },
+    {
+        "id": 31,
+        "nombre": "POLERA    BELLISTA",
+        "descripcion": "Deja que  tu    ropa    hable   por    ti. Esta polera   actualiza  el    legado  deportivo de   adidas...",
+        "precio": 249.00,
+        "url": "producto3.png",
+        "desctacado": true,
+        "activo": true
+    },
+    {
+        "id": 13,
+        "nombre": "POLO  NIÑA  ORIGINALS",
+        "descripcion": "Prepárate    para    el  verano.   Este   polo   luce   un gran logo del  Trifolio  que   resalta    sobre   detalles   florales   coloridos...",
+        "precio": 79.00,
+        "url": "producto4.png",
+        "desctacado": true,
+        "activo": true
+    }
+]
